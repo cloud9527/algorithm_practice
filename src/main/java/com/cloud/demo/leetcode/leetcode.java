@@ -1,6 +1,8 @@
 package com.cloud.demo.leetcode;
 
 /**
+ * []
+ *
  * @author: wangjing
  * @date 2023/4/10
  **/
@@ -8,13 +10,14 @@ public class leetcode {
 	public static void main(String[] args) {
 		//int[] arr = {1, 2, 0, 0, 5, 0, 7};
 		//int[] arr = {0, 2, 0, 0, 5, 9, 0};
-		int[] arr ={0,1,0,3,12};
-		printArr(arr);
+		int[] arr = {2, 7, 11, 15,16,18,22,55};
+		//printArr(arr);
 		//int[] res = sortedSquares997(arr);
 		//int[] res = rotate189(arr, 3);
 		//printArr(res);
 		//rotate189_2(arr, 3);
-		moveZeroes283(arr);
+		//moveZeroes283(arr);
+		printArr(twoSum167(arr, 77));
 	}
 
 	private static void printArr(int[] a) {
@@ -79,14 +82,31 @@ public class leetcode {
 	public static void moveZeroes283(int[] nums) {
 		int slow = 0;
 		for (int fast = 0; fast < nums.length; fast++) {
-			if (nums[fast]!=0){
+			if (nums[fast] != 0) {
 				int temp = nums[slow];
 				nums[slow] = nums[fast];
-				nums[fast] =temp;
+				nums[fast] = temp;
 				slow++;
 			}
 		}
 		printArr(nums);
 	}
 
+
+	public static int[] twoSum167(int[] numbers, int target) {
+		int i = 0;
+		int j = numbers.length - 1;
+		while (i < j) {
+			int sum = numbers[i] + numbers[j];
+			if (sum < target) {
+				i++;
+			} else if (sum > target) {
+				j--;
+			} else {
+				return new int[]{i + 1, j + 1};
+			}
+		}
+		return new int[]{-1, -1};
+
+	}
 }
