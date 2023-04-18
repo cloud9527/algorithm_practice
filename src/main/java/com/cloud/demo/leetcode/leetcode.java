@@ -10,14 +10,16 @@ public class leetcode {
 	public static void main(String[] args) {
 		//int[] arr = {1, 2, 0, 0, 5, 0, 7};
 		//int[] arr = {0, 2, 0, 0, 5, 9, 0};
-		int[] arr = {2, 7, 11, 15,16,18,22,55};
+		int[] arr = {2, 7, 11, 15, 16, 18, 22, 55};
 		//printArr(arr);
 		//int[] res = sortedSquares997(arr);
 		//int[] res = rotate189(arr, 3);
 		//printArr(res);
 		//rotate189_2(arr, 3);
 		//moveZeroes283(arr);
-		printArr(twoSum167(arr, 77));
+		//printArr(twoSum167(arr, 77));
+		String word1 = "cf", word2 = "eee";
+		System.out.println(mergeAlternately1768(word1, word2));
 	}
 
 	private static void printArr(int[] a) {
@@ -108,5 +110,25 @@ public class leetcode {
 		}
 		return new int[]{-1, -1};
 
+	}
+
+	public static String mergeAlternately1768(String word1, String word2) {
+		String tailStr;
+		if (word1.length() > word2.length()) {
+			tailStr = word1.substring(word2.length());
+			word1 = word1.substring(0, word1.length() - tailStr.length());
+		} else if (word1.length() < word2.length()) {
+			tailStr = word2.substring(word1.length());
+			word2 = word2.substring(0, word2.length() - tailStr.length());
+		} else {
+			tailStr = "";
+		}
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 0; i < word1.length(); i++) {
+			stringBuilder.append(word1.charAt(i));
+			stringBuilder.append(word2.charAt(i));
+		}
+		stringBuilder.append(tailStr);
+		return stringBuilder.toString();
 	}
 }
