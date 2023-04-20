@@ -1,5 +1,8 @@
 package com.cloud.demo.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * []
  *
@@ -18,8 +21,11 @@ public class leetcode {
 		//rotate189_2(arr, 3);
 		//moveZeroes283(arr);
 		//printArr(twoSum167(arr, 77));
-		String word1 = "cf", word2 = "eee";
-		System.out.println(mergeAlternately1768(word1, word2));
+		//String word1 = "cf", word2 = "eee";
+		//System.out.println(mergeAlternately1768(word1, word2));
+
+		String str1 = "LEET", str2 = "CODE";
+		System.out.println(gcdOfStrings1071(str1, str2));
 	}
 
 	private static void printArr(int[] a) {
@@ -130,5 +136,42 @@ public class leetcode {
 		}
 		stringBuilder.append(tailStr);
 		return stringBuilder.toString();
+	}
+
+	public static String gcdOfStrings1071(String str1, String str2) {
+		// 假设str1是N个x，str2是M个x，那么str1+str2肯定是等于str2+str1的。
+		if (!(str1 + str2).equals(str2 + str1)) {
+			return "";
+		}
+		int g = gcd(str1.length(), str2.length());
+		// 辗转相除法求gcd。
+		return str1.substring(0, g);
+	}
+
+
+	private static int gcd(int a, int b) {
+		return b == 0 ? a : gcd(b, a % b);
+	}
+
+
+	public List<Boolean> kidsWithCandies1431(int[] candies, int extraCandies) {
+		int max = 0;
+		for (int candy : candies) {
+			if (candy > max) {
+				max = candy;
+			}
+		}
+
+		List<Boolean> result = new ArrayList<>();
+		for (int candy : candies) {
+			if (candy + extraCandies < max) {
+				result.add(false);
+			}else {
+				result.add(true);
+			}
+		}
+
+		return result;
+
 	}
 }
