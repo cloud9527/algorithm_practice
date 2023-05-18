@@ -2,7 +2,9 @@ package com.cloud.demo.twopoint;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 双指针练习
@@ -53,5 +55,78 @@ public class TwoPointTest {
 				return;
 			}
 		}
+	}
+
+	/**
+	 * 题目：输入一个数组，如何找出数组中所有和为0的3个数字的三元组？
+	 * 需要注意的是，返回值中不得包含重复的三元组。
+	 * 例如，在数组[-1，0，1，2，-1，-4]中有两个三元组的和为0，它们分别是[-1，0，1]和[-1，-1，2]。
+	 */
+	@Test
+	public void test7() {
+		int[] arr = {-1, -1, 0, 1, 2, 2, -1, -4};
+		System.out.println(threeSumM(arr));
+	}
+
+	public List<List<Integer>> threeSum(int[] nums) {
+		Arrays.sort(nums); // 对数组进行排序
+		List<List<Integer>> result = new ArrayList<>(); // 存储结果的集合
+		for (int i = 0; i < nums.length - 2; i++) { // 进行枚举
+			if (i > 0 && nums[i] == nums[i - 1]) {
+				continue; // 去重（如果当前数和上一个数相同，则跳过）
+			}
+			int left = i + 1, right = nums.length - 1;
+			while (left < right) { // 双指针的方式寻找符合条件的三个数
+				int sum = nums[i] + nums[left] + nums[right];
+				if (sum == 0) {
+					result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+					left++;
+					right--;
+					while (left < right && nums[left] == nums[left - 1]) {
+						left++; // 去重（如果当前数和上一个数相同，则跳过）
+					}
+					while (left < right && nums[right] == nums[right + 1]) {
+						right--; // 去重（如果当前数和上一个数相同，则跳过）
+					}
+				} else if (sum < 0) {
+					left++;
+				} else {
+					right--;
+				}
+			}
+		}
+		return result;
+	}
+
+	public List<List<Integer>> threeSumM(int[] nums) {
+		Arrays.sort(nums);
+		List<List<Integer>> res = new ArrayList<>();
+
+		for (int i = 0; i < nums.length - 2; i++) {
+			if (i > 0 && nums[i] == nums[i - 1]) {
+				continue;
+			}
+			int left = i + 1, right = nums.length - 1;
+			while (left < right) {
+				int sum = nums[i] + nums[left] + nums[right];
+				if (sum == 0) {
+					res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+					left++;
+					right--;
+					//跳过重复元素
+					while (left < right && nums[left] == nums[left - 1]) {
+						left++;
+					}
+					while (left < right && nums[right] == nums[right + 1]) {
+						right--;
+					}
+				} else if (sum < 0) {
+					left++;
+				} else {
+					right--;
+				}
+			}
+		}
+		return res;
 	}
 }
